@@ -1,8 +1,9 @@
 <template>
+<div class="container-fluid">
     <div class="row">
         <loading :active.sync="isLoading"></loading>
-        <div class="col-lg-4 col-sm-12 mb-4" v-for ="item in products" :key="item.id" v-if="item.category == 'Scary'">
-                <div class="card">
+        <div class="col-lg-4 col-sm-12 mb-4" v-for ="item in products" :key="item.id"  v-if="item.category == 'Scary'">
+            <div class="card">
                     <div class="card-cover">
                         <div>
                             <a href="#" @click.prevent="getProduct(item.id)">
@@ -14,7 +15,7 @@
                     <div style="height: 300px; background-size: cover; background-position: center"
                     :style="{backgroundImage: `url(${item.imageUrl})`}">
                     </div>
-                    <div class="card-body">
+                <div class="card-body">
                     <span class="badge  badge-danger float-right ml-2" v-if="item.category">{{item.category}}</span>
                     <h5 class="card-title">
                         <a href="#" class="text-dark">{{item.title}}</a>
@@ -23,51 +24,52 @@
                     <div class="d-flex justify-content-between align-items-baseline">
                         <div class="h6 text-danger" v-if="item.price">$ {{item.price}} 元</div>
                     </div>
-                    </div>
                 </div>
-                <!-- Modal -->
-                <div class="modal fade" id="ProductModal" tabindex="-1" role="dialog" aria-labelledby="ProductModalTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">{{product.title}}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col">
-                                    <img :src="product.imageUrl" alt="" class="img-fluid">
-                                </div>
-                            </div>
-                            <h5 class="mt-2 mb-4">{{product.description}}</h5>
-                            <div class="d-flex justify-content-between align-items-baseline">
-                                <!-- <div class="h5">2,800 元</div> -->
-                                <del class="h4" v-if="!product.price">原價 {{product.origin_price}} 元</del>
-                                <del class="h6" v-if="product.price">原價 {{product.origin_price}} 元</del>
-                                <div class="h4" v-if="product.price">現在只要 <span class="text-danger">{{product.price}} </span>元</div>
-                            </div>
-                            <div class="p-3">
-                                {{product.content}}
-                            </div>
-                            <select name="" class="form-control mt-3" v-model="product.num">
-                                <option :value="num" v-for="num in 12" :key="num">
-                                    訂閱 {{num}} 個{{product.unit}}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="text-muted mr-3 h6">
-                                小計 <strong class="text-danger h5">{{product.price * product.num}} </strong>元
-                            </div>
-                            <button type="button" class="btn btn-info text-gold" data-dismiss="modal" @click="addtoCart(product.id, product.num)">加到購物車</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
         </div>
     </div>
+<!-- Modal -->
+    <div class="modal fade" id="ProductModal" tabindex="-1" role="dialog" aria-labelledby="ProductModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">{{product.title}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <img :src="product.imageUrl" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <h5 class="mt-2 mb-4">{{product.description}}</h5>
+                <div class="d-flex justify-content-between align-items-baseline">
+                    <!-- <div class="h5">2,800 元</div> -->
+                    <del class="h4" v-if="!product.price">原價 {{product.origin_price}} 元</del>
+                    <del class="h6" v-if="product.price">原價 {{product.origin_price}} 元</del>
+                    <div class="h4" v-if="product.price">現在只要 <span class="text-danger">{{product.price}} </span>元</div>
+                </div>
+                <div class="p-3">
+                    {{product.content}}
+                </div>
+                <select name="" class="form-control mt-3" v-model="product.num">
+                    <option :value="num" v-for="num in 12" :key="num">
+                        訂閱 {{num}} 個{{product.unit}}
+                    </option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <div class="text-muted mr-3 h6">
+                    小計 <strong class="text-danger h5">{{product.price * product.num}} </strong>元
+                </div>
+                <button type="button" class="btn btn-info text-gold" data-dismiss="modal" @click="addtoCart(product.id, product.num)">加到購物車</button>
+            </div>
+            </div>
+        </div>
+    </div>    
+</div>
 </template>
 
 <script>
