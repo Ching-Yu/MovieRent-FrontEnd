@@ -1,6 +1,8 @@
 # vue-cli-shop
 
-> A Vue.js project
+電影租借網址前端頁面
+
+https://ching-yu.github.io/MovieRent-FrontEnd/#/home
 
 ## Build Setup
 
